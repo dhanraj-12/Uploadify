@@ -6,9 +6,10 @@ const fs = require("fs")
 const uploadToS3 = async (filepath,filename) => {
     try {
         const filestream = fs.createReadStream(filepath);
+        const s3key = `edited/${Date.now()}_${filename}`; 
         const uploadParams = {
             Bucket : process.env.S3_BUCKET_NAME,
-            Key : `edited/${Date.now()}_${filename}`,
+            Key : s3key,
             Body : filestream,
             ContentType : "video/mp4"
         };
@@ -17,7 +18,7 @@ const uploadToS3 = async (filepath,filename) => {
         await s3.send(command);
 
         console.log("✅ File uploaded successfully:", filename);
-        return `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+        return s3key;
 
 
     } catch(err) {
