@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const ed_upload = require("../Functions/ed_uploadtos3");
 const video = require("../Models/video_model")
+const fs = require("fs")
+
 
 const router = express.Router();
 
@@ -14,7 +16,12 @@ router.post("/upload_edited",upload.single("video"), async(req,res) => {
     console.log("📩 Request received"); // ✅ Log request received
     try {   
         const id = String(req.body.id).trim();
+        const {tags,title,description} = req.body;
         console.log("uuid: ", id);
+        console.log("title: ", title);
+        console.log("description: ", description);
+        console.log("tags: ", tags);
+
         if (!id) {
             return res.status(400).send("ID is required");
         }
@@ -25,6 +32,9 @@ router.post("/upload_edited",upload.single("video"), async(req,res) => {
             {uuid : id},
             {
                 ed_s3key: s3key,
+                tags: tags,
+                title: title,
+                description: description,
                 
             },
             { new: true } // Return the updated document
@@ -43,8 +53,20 @@ router.post("/upload_edited",upload.single("video"), async(req,res) => {
         console.log("💾 Saving to database...");
         console.log("✅ Video saved!");
 
+        fs.unlink(req.file.path, (err) => {
+            if (err) console.error("⚠️ Temp file deletion failed:", err);
+        });
+
+
+
         res.json({ message: "Edited File uploaded successfully", s3key});
     }catch(err) {
+
+
+        if (req.file?.path) {
+            fs.unlinkSync(req.file.path);
+        }
+
         console.error("❌ Upload failed:", err);
         res.status(500).json({ error: "Upload failed", details: err.message });
     }
