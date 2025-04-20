@@ -77,7 +77,7 @@ const EditorDashboard = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await axios.get("http://3.110.117.63:3000/api/assigned", {
+      const response = await axios.get("http://localhost:3000/api/assigned", {
         params: {
           email: userEmail,
         },
@@ -111,7 +111,7 @@ const EditorDashboard = () => {
 
       // API call to update status
       await axios.patch(
-        `http://3.110.117.63:3000/api/videos/status`,
+        `http://localhost:3000/api/videos/status`,
         {
           status: newStatus,
           videoId,

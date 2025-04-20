@@ -57,7 +57,7 @@ const VideoDashboard = () => {
         const user = localStorage.getItem("user-info");
         const parsedUser = JSON.parse(user);
 
-        const response = await axios.get("http://3.110.117.63:3000/api/final", {
+        const response = await axios.get("http://localhost:3000/api/final", {
           params: {
             ytmail: parsedUser.email,
           },
@@ -130,7 +130,7 @@ const VideoDashboard = () => {
       }
 
       const response = await axios.post(
-        "http://3.110.117.63:3000/api/upload_unedited", 
+        "http://localhost:3000/api/upload_unedited", 
         formData, 
         {
           headers: {
@@ -148,7 +148,7 @@ const VideoDashboard = () => {
       console.log("Upload response:", response.data);
 
       // Refresh the video list
-      const refreshResponse = await axios.get("http://3.110.117.63:3000/api/final", {
+      const refreshResponse = await axios.get("http://localhost:3000/api/final", {
         params: {
           ytmail: parsedUser.email,
         },

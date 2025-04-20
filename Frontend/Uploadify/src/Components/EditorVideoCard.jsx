@@ -94,7 +94,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       })
 
       await axios.patch(
-        `http://3.110.117.63:3000/api/videos/status`,
+        `http://localhost:3000/api/videos/status`,
         {
           status: "in-progress",
           videoId: video.uuid,
@@ -120,7 +120,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       try {
         setLoading(true)
         await axios.patch(
-          `http://3.110.117.63:3000/api/videos/status`,
+          `http://localhost:3000/api/videos/status`,
           {
             status: "rejected",
             videoId: video.uuid,
@@ -168,7 +168,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       formData.append("tags", videoTags)
       formData.append("id", video.uuid)
 
-      const response = await axios.post(`http://3.110.117.63:3000/api/upload_edited`, formData, {
+      const response = await axios.post(`http://localhost:3000/api/upload_edited`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
