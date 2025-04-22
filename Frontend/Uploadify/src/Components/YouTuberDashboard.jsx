@@ -4,6 +4,11 @@ import VideoCard from "./VideoComponent";
 import axios from "axios";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import  config  from "../../config";
+
+
+
+const API = config.url;
 
 const VideoDashboard = () => {
   const [videos, setVideos] = useState([]);
@@ -57,7 +62,7 @@ const VideoDashboard = () => {
         const user = localStorage.getItem("user-info");
         const parsedUser = JSON.parse(user);
 
-        const response = await axios.get("http://localhost:3000/api/final", {
+        const response = await axios.get(`${API}/api/final`, {
           params: {
             ytmail: parsedUser.email,
           },
@@ -130,7 +135,7 @@ const VideoDashboard = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/upload_unedited", 
+        `${API}/api/upload_unedited`, 
         formData, 
         {
           headers: {
@@ -148,7 +153,7 @@ const VideoDashboard = () => {
       console.log("Upload response:", response.data);
 
       // Refresh the video list
-      const refreshResponse = await axios.get("http://localhost:3000/api/final", {
+      const refreshResponse = await axios.get(`${API}/api/final`, {
         params: {
           ytmail: parsedUser.email,
         },

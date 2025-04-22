@@ -15,11 +15,16 @@ import {
   FiClock,
   FiEdit,
   FiSend,
-  FiCheck,
+  FiCheck,  
 } from "react-icons/fi"
 import EditorVideoCard from "./EditorVideoCard"
 import Footer from "./Footer"
 import NavBar from "./NavBar"
+import config from "../../config"
+
+
+const API = config.url;
+
 
 const EditorDashboard = () => {
   const [videos, setVideos] = useState([])
@@ -77,7 +82,7 @@ const EditorDashboard = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await axios.get("http://localhost:3000/api/assigned", {
+      const response = await axios.get(`${API}/api/assigned`, {
         params: {
           email: userEmail,
         },
@@ -111,7 +116,7 @@ const EditorDashboard = () => {
 
       // API call to update status
       await axios.patch(
-        `http://localhost:3000/api/videos/status`,
+        `${API}/api/videos/status`,
         {
           status: newStatus,
           videoId,

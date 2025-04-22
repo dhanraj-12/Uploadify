@@ -4,6 +4,10 @@ import { useState, useEffect } from "react"
 import { FiClock, FiEdit, FiCheck, FiUpload, FiPlay, FiSend, FiDownload, FiX, FiTag } from "react-icons/fi"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import config from "../../config"
+
+const API = config.url;
+
 
 const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false }) => {
   const navigate = useNavigate()
@@ -94,7 +98,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       })
 
       await axios.patch(
-        `http://localhost:3000/api/videos/status`,
+        `${API}/api/videos/status`,
         {
           status: "in-progress",
           videoId: video.uuid,
@@ -120,7 +124,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       try {
         setLoading(true)
         await axios.patch(
-          `http://localhost:3000/api/videos/status`,
+          `${API}/api/videos/status`,
           {
             status: "rejected",
             videoId: video.uuid,
@@ -168,7 +172,7 @@ const EditorVideoCard = ({ video: propVideo, onStatusUpdate, darkMode = false })
       formData.append("tags", videoTags)
       formData.append("id", video.uuid)
 
-      const response = await axios.post(`http://localhost:3000/api/upload_edited`, formData, {
+      const response = await axios.post(`${API}/api/upload_edited`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",

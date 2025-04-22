@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
-  const navigate = useNavigate()
+  
+  const navigate = useNavigate();
+  
   const userinfo = JSON.parse(localStorage.getItem('user-info'))
   const userimg = userinfo?.image || 'default-profile.png' // Fallback to a default image if not available
   console.log(userimg)
