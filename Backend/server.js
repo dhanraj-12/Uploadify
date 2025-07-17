@@ -12,8 +12,8 @@ const authrouter = require("./routes/authroute");
 const ytuploadroute = require("./routes/yt_upload");
 const statusupdate = require("./routes/ups_route");
 const cmtupdate = require("./routes/update_cmt")
-
-
+const https = require("https");
+const fs = require("fs")
 
 dotnev.config()
 app.use(express.json())
@@ -39,3 +39,16 @@ app.use("/api",statusupdate);
 app.use("/api",cmtupdate);
 
 app.listen(port, () => console.log(`uploadify listening on port ${port}!`))
+
+
+
+// const sslConfig = {
+//   key: fs.readFileSync("certificates/server.key"),
+//   cert: fs.readFileSync("certificates/server.crt"),
+// };
+
+// const server = https.createServer(sslConfig, app);
+
+// server.listen(port, ()=> {
+//     console.log(`uploadify listening on port ${port}!`)
+// })

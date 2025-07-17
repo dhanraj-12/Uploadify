@@ -4,6 +4,7 @@ const fs = require("fs")
 
 
 const uploadToS3 = async (filepath,filename) => {
+    
     try {
         const filestream = fs.createReadStream(filepath);
         const s3key = `edited/${Date.now()}_${filename}`; 
@@ -21,10 +22,12 @@ const uploadToS3 = async (filepath,filename) => {
         return s3key;
 
 
-    } catch(err) {
-        console.error("❌ Upload failed:", err);
-        throw err;
-    }
+        } catch(err) {
+            console.error("❌ Upload failed:", err);
+            throw err;
+        }
 }
+
+
 
 module.exports = uploadToS3
