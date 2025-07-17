@@ -93,6 +93,20 @@ uploadify/
 └── README.md
 ```
 
+## 📸 Screenshots/Demo
+
+If applicable, add screenshots or GIFs demonstrating your project:
+
+
+
+![Home page](Frontend/Uploadify/public/langing.png)
+![Dashboard](Frontend/Uploadify/public/youtuberdashboard.png)
+![Dashboard](Frontend/Uploadify/public/editordashboard.png)
+![roles](Frontend/Uploadify/public/roles.png)
+![Preview](Frontend/Uploadify/public/preview.png)
+
+
+
 ## How It Works
 
 1. **Upload:** YouTubers upload raw videos which are stored in an S3 bucket
